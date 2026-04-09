@@ -152,19 +152,15 @@ source .venv/bin/activate        # Windows: .venv\Scripts\activate
 # 3. Install dependencies
 pip install -r requirements.txt
 
-# 4a. Run the clean Python script (all outputs saved to current directory)
-python census_income_pipeline.py
-
-# 4b. Or open the interactive notebook
+# 4. open the interactive notebook
 jupyter notebook Census_Income_Data_Mining_Project.ipynb
 ```
 
 ---
 
-## Authors
 
 **Emad Kalantari Khalilabad** — [GitHub](https://github.com/emaadkalantarii)  
-**Yousef Rezaei Mirghaed**  
+
 
 *Knowledge Discovery and Data Mining — Master's Programme*
 
