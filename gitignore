@@ -1,0 +1,45 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+*.egg
+
+# Virtual environments
+.venv/
+venv/
+env/
+.env
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# Editor configs (do NOT commit IDE-specific settings)
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Data (large files — use DVC or link to source)
+data/
+*.csv
+
+# Model artefacts
+*.pkl
+*.joblib
+*.h5
+
+# Output figures (regenerate from code)
+*.png
+
+# Logs
+*.log
