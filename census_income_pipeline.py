@@ -23,7 +23,7 @@ Run
 ---
     python census_income_pipeline.py
 
-Authors : Emad Kalantari Khalilabad, Yousef Rezaei Mirghaed
+Authors : Emad Kalantari
 Course  : Knowledge Discovery and Data Mining
 """
 
