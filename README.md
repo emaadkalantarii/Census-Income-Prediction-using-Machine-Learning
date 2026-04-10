@@ -159,7 +159,7 @@ jupyter notebook Census_Income_Data_Mining_Project.ipynb
 ---
 
 
-**Emad Kalantari Khalilabad** — [GitHub](https://github.com/emaadkalantarii)  
+**Emad Kalantari** — [GitHub](https://github.com/emaadkalantarii)  
 
 
 *Knowledge Discovery and Data Mining — Master's Programme*
