@@ -153,8 +153,8 @@ python census_income_pipeline.py
 
 ## Authors
 
-**Emad Kalantari Khalilabad** — [GitHub](https://github.com/emaadkalantarii)  
-**Yousef Rezaei Mirghaed**
+**Emad Kalantari** — [GitHub](https://github.com/emaadkalantarii)  
+
 
 *Knowledge Discovery and Data Mining — Master's Programme*
 
