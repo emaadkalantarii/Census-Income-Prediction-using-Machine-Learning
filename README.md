@@ -17,7 +17,6 @@
 - [Repository Structure](#repository-structure)
 - [Pipeline](#pipeline)
 - [Results](#results)
-- [Visualisations](#visualisations)
 - [Quickstart](#quickstart)
 - [Authors](#authors)
 
@@ -31,13 +30,13 @@ This project applies the **Knowledge Discovery in Databases (KDD)** process to t
 
 ## Business Impact
 
-Understanding income determinants has real-world value:
+Understanding income determinants has real-world value across multiple domains:
 
-- **Policy-making:** Governments can use income-prediction models to target social support programmes more effectively.
+- **Policy-making:** Governments can target social support programmes more effectively by identifying at-risk demographics.
 - **Credit risk:** Financial institutions can supplement traditional credit scoring with demographic risk signals.
 - **Labour-market research:** Researchers can quantify the contribution of education, occupation, and working hours to income inequality.
 
-Achieving **~87% accuracy** with an interpretable, reproducible pipeline means this work can be directly used or extended for such applications.
+Achieving **~87% accuracy** with a reproducible, well-documented pipeline means this work can be directly extended for such applications.
 
 ---
 
@@ -49,7 +48,7 @@ Achieving **~87% accuracy** with an interpretable, reproducible pipeline means t
 | Instances | 48,842 (47,621 after cleaning) |
 | Features | 14 (6 numerical + 8 categorical) |
 | Target | `income`: `<=50K` / `>50K` |
-| Missing values | ~3.7% of rows (workclass, occupation, native-country) |
+| Missing values | ~2.5% of rows (workclass, occupation, native-country) |
 
 **Numerical features:** `age`, `fnlwgt`, `education-num`, `capital-gain`, `capital-loss`, `hours-per-week`
 
@@ -62,9 +61,15 @@ Achieving **~87% accuracy** with an interpretable, reproducible pipeline means t
 ```
 Census-Income-Prediction-using-Machine-Learning/
 │
-├── Census_Income_Data_Mining_Project.ipynb   # Full interactive notebook
-├── census_income_pipeline.py                 # Clean, modular Python script
-├── requirements.txt                          # Reproducible dependency list
+├── Census_Income_Prediction.ipynb   # Interactive notebook — full pipeline with
+│                                    # inline visualisations and narrative commentary.
+│                                    # Best entry point for exploring the project.
+│
+├── census_income_pipeline.py        # Self-contained Python script — same logic as
+│                                    # the notebook in a clean, modular form.
+│                                    # Run this to reproduce all results end-to-end.
+│
+├── requirements.txt                 # Pinned dependencies for reproducibility
 ├── .gitignore
 └── README.md
 ```
@@ -85,27 +90,27 @@ Raw Data  ──►  Data Cleaning  ──►  EDA  ──►  Preprocessing  �
 
 ### 2 · Exploratory Data Analysis
 - Descriptive statistics for all numerical features
-- **Stacked bar chart:** income distribution by gender
-- **Correlation heatmap:** relationships among numerical features
-- **Age histogram with KDE:** age distribution coloured by income class
+- **Income by gender** — stacked bar chart
+- **Correlation heatmap** — relationships among numerical features
+- **Age distribution** — histogram with KDE, coloured by income class
 
 ### 3 · Preprocessing
 - `MinMaxScaler` applied to 6 numerical features
 - `pd.get_dummies` (one-hot encoding, `drop_first=True`) for 8 categorical features
 - `LabelEncoder` applied to binary target (`<=50K` → 0, `>50K` → 1)
-- Stratified 70/30 train-test split
+- **Stratified** 70/30 train-test split
 
 ### 4 · Hyperparameter Sensitivity
-Accuracy was measured across a grid of key hyperparameters to select optimal values without overfitting:
+Accuracy was measured across a grid of key hyperparameters to select optimal values:
 
 | Model | Parameter explored | Chosen value |
 |---|---|---|
 | Logistic Regression | Regularisation `C` ∈ {0.01, 0.1, 1, 10, 100} | `C = 100` |
 | Random Forest | `n_estimators` ∈ {10 … 300}, `max_depth` ∈ {5 … None} | 200 trees, depth 20 |
-| XGBoost | `learning_rate` ∈ {0.01 … 0.5}, `n_estimators` ∈ {50 … 200} | lr = 0.30, 100 trees |
+| XGBoost | `learning_rate` ∈ {0.01 … 0.5}, `n_estimators` ∈ {50 … 400} | lr = 0.30, 100 trees |
 
 ### 5 · Evaluation Metrics
-Accuracy, MSE, RMSE, R², Precision, Recall, F1 (all macro-averaged), and confusion matrices.
+Accuracy, MSE, RMSE, R², Precision, Recall, F1 (macro-averaged), and confusion matrices.
 
 ---
 
@@ -119,22 +124,7 @@ Accuracy, MSE, RMSE, R², Precision, Recall, F1 (all macro-averaged), and confus
 
 **XGBoost achieves the best performance across all metrics**, delivering 86.95% accuracy and an F1 score of 0.814 — a +2.2 pp accuracy gain over the Logistic Regression baseline.
 
----
-
-## Visualisations
-
-| File | Description |
-|---|---|
-| `eda_income_by_gender.png` | Stacked bar — income class by sex |
-| `eda_correlation_matrix.png` | Heatmap of numerical feature correlations |
-| `eda_age_distribution.png` | Age histogram with KDE, coloured by income |
-| `hp_lr_c.png` | LR accuracy vs regularisation C |
-| `hp_rf_nestimators.png` | RF accuracy vs number of trees |
-| `hp_rf_depth.png` | RF accuracy vs max depth |
-| `hp_xgb_lr.png` | XGBoost accuracy vs learning rate |
-| `cm_logistic_regression.png` | Confusion matrix — Logistic Regression |
-| `cm_random_forest.png` | Confusion matrix — Random Forest |
-| `cm_xgboost.png` | Confusion matrix — XGBoost |
+> All charts and confusion matrices render inline when viewing the notebook on GitHub or running it locally.
 
 ---
 
@@ -152,15 +142,19 @@ source .venv/bin/activate        # Windows: .venv\Scripts\activate
 # 3. Install dependencies
 pip install -r requirements.txt
 
-# 4. open the interactive notebook
-jupyter notebook Census_Income_Data_Mining_Project.ipynb
+# 4a. Open the interactive notebook (recommended)
+jupyter notebook Census_Income_Prediction.ipynb
+
+# 4b. Or run the pipeline script directly
+python census_income_pipeline.py
 ```
 
 ---
 
+## Authors
 
-**Emad Kalantari** — [GitHub](https://github.com/emaadkalantarii)  
-
+**Emad Kalantari Khalilabad** — [GitHub](https://github.com/emaadkalantarii)  
+**Yousef Rezaei Mirghaed**
 
 *Knowledge Discovery and Data Mining — Master's Programme*
 
