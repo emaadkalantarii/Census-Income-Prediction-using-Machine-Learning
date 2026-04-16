@@ -62,15 +62,28 @@ Achieving **~87% accuracy** with a reproducible, well-documented pipeline means 
 Census-Income-Prediction-using-Machine-Learning/
 │
 ├── Census_Income_Prediction.ipynb   # Interactive notebook — full pipeline with
-│                                    # inline visualisations and narrative commentary.
-│                                    # Best entry point for exploring the project.
+│                                    # inline visualisations and narrative markdown
+│                                    # commentary. Best entry point for exploring
+│                                    # the project; all outputs are pre-rendered.
 │
 ├── census_income_pipeline.py        # Self-contained Python script — same logic as
 │                                    # the notebook in a clean, modular form.
 │                                    # Run this to reproduce all results end-to-end.
+│                                    # Saves the following files to the working dir:
+│                                    #   eda_income_by_gender.png
+│                                    #   eda_correlation_matrix.png
+│                                    #   eda_age_distribution.png
+│                                    #   hp_lr_c.png
+│                                    #   hp_rf_nestimators.png · hp_rf_depth.png
+│                                    #   hp_xgb_lr.png · hp_xgb_nestimators.png
+│                                    #   cm_logistic_regression.png
+│                                    #   cm_random_forest.png · cm_xgboost.png
+│                                    #   model_comparison.png
+│                                    #   model_results.csv
 │
 ├── requirements.txt                 # Pinned dependencies for reproducibility
-├── .gitignore
+├── .gitignore                       # Excludes caches, venvs, IDE configs,
+│                                    # generated PNGs, and CSV outputs
 └── README.md
 ```
 
@@ -81,26 +94,29 @@ Census-Income-Prediction-using-Machine-Learning/
 ## Pipeline
 
 ```
-Raw Data  ──►  Data Cleaning  ──►  EDA  ──►  Preprocessing  ──►  Model Training  ──►  Evaluation
+Raw Data  ──►  Exploration  ──►  Data Cleaning  ──►  EDA  ──►  Preprocessing  ──►  HP Tuning  ──►  Model Training  ──►  Evaluation
 ```
 
-### 1 · Data Cleaning
+### 1 · Data Exploration
+- Inspect column types, missing-value counts, and raw class distribution
+
+### 2 · Data Cleaning
 - Strip inconsistent formatting from the target label (`<=50K.` → `<=50K`)
 - Drop rows with missing values (1,221 rows removed, ~2.5%)
 
-### 2 · Exploratory Data Analysis
+### 3 · Exploratory Data Analysis
 - Descriptive statistics for all numerical features
 - **Income by gender** — stacked bar chart
 - **Correlation heatmap** — relationships among numerical features
 - **Age distribution** — histogram with KDE, coloured by income class
 
-### 3 · Preprocessing
+### 4 · Preprocessing
 - `MinMaxScaler` applied to 6 numerical features
 - `pd.get_dummies` (one-hot encoding, `drop_first=True`) for 8 categorical features
 - `LabelEncoder` applied to binary target (`<=50K` → 0, `>50K` → 1)
 - **Stratified** 70/30 train-test split
 
-### 4 · Hyperparameter Sensitivity
+### 5 · Hyperparameter Sensitivity
 Accuracy was measured across a grid of key hyperparameters to select optimal values:
 
 | Model | Parameter explored | Chosen value |
@@ -109,7 +125,7 @@ Accuracy was measured across a grid of key hyperparameters to select optimal val
 | Random Forest | `n_estimators` ∈ {10 … 300}, `max_depth` ∈ {5 … None} | 200 trees, depth 20 |
 | XGBoost | `learning_rate` ∈ {0.01 … 0.5}, `n_estimators` ∈ {50 … 400} | lr = 0.30, 100 trees |
 
-### 5 · Evaluation Metrics
+### 6 · Evaluation Metrics
 Accuracy, MSE, RMSE, R², Precision, Recall, F1 (macro-averaged), and confusion matrices.
 
 ---
@@ -153,8 +169,8 @@ python census_income_pipeline.py
 
 ## Authors
 
-**Emad Kalantari** — [GitHub](https://github.com/emaadkalantarii)  
-
+**Emad Kalantari Khalilabad** — [GitHub](https://github.com/emaadkalantarii)  
+**Yousef Rezaei Mirghaed**
 
 *Knowledge Discovery and Data Mining — Master's Programme*
 
